@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20240902</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        #input_append {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            margin-left: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button#btn_add {
+            background-color: #4CAF50; /* 녹색 */
+            color: white;
+        }
+
+        button#btn_add:hover {
+            background-color: #45a049;
+        }
+
+        button#btn_delete {
+            background-color: #f44336; /* 빨간색 */
+            color: white;
+        }
+
+        button#btn_delete:hover {
+            background-color: #e53935;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        li:hover {
+            color: red;
+            text-decoration: line-through;
+        }
+    </style>
+    
+</head>
+<body>
+
+<div>동적 페이지 생성입니다.</div>
+<input type="text" id="input_append" />
+<button id="btn_add" onclick="listener_append()">등록</button>
+<button id="btn_delete" onclick="delete_all()">전체 삭제</button>
+
+<ul id="ul_append">
+</ul>
+
+<script>
+    function listener_append(){
+        let ul_append = document.getElementById("ul_append");
+        let input_append = document.getElementById("input_append").value;
+        
+        if(input_append === "" || input_append == "undefined"){
+            return false;
+        }
+
+        let new_li = document.createElement("li");
+        new_li.setAttribute("onclick", "listener_remove(this)");
+        new_li.textContent = input_append;
+        ul_append.appendChild(new_li);
+
+        document.getElementById("input_append").value = "";
+    }
+
+    function listener_remove(obj){
+        obj.remove();
+    }
+
+    function delete_all(){
+        let ul_append = document.getElementById("ul_append");
+        ul_append.innerHTML = "";
+        document.getElementById("input_append").value = "";
+    }
+</script>
+
+</body>
+</html>

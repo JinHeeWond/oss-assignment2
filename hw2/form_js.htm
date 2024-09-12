@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Logo</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      
+      background-color: #E2E2E2; 
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column; /* 세로 정렬 */
+      align-items: center; /* 가로 가운데 정렬 */
+    }
+
+    .logo-container {
+      width: 70px; 
+      height: 70px;
+      background-color: #7952b3; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px; 
+      font-family: Arial, sans-serif;
+      font-size: 50px; 
+      color: white;
+      position: relative; /* 양옆 곡선을 유지하기 위한 position 설정 */
+    }
+
+    /* B로고 양옆에 있는 곡선들 */
+    .logo-container::before, .logo-container::after {
+      content: '';
+      position: absolute;
+      width: 20px; 
+      height: 20px;
+      background-color: #7952b3;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .logo-container::before {
+      left: -7px;
+      border-radius: 50px 0 0 50px;
+    }
+
+    .logo-container::after {
+      right: -7px;
+      border-radius: 0 50px 50px 0;
+    }
+
+    .smallbox {
+      width: 40px; /* 크기 */
+      height: 40px;
+      background-color: gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100px; 
+      font-family: Arial, sans-serif;
+      font-size: 20px; 
+      color: white;
+      margin-right: 20px; 
+    }
+
+    h2 {
+      margin-top: 20px; 
+      color: #333;
+      font-size: 40px; 
+    }
+
+    h1 {
+      color: #333;
+      font-size: 20px; 
+      display: flex;
+    }
+
+    .row {
+      display: flex;
+      align-items: center; /* 로고와 텍스트 세로 정렬 */
+      justify-content: flex-start; /* 왼쪽 정렬 */
+      width: 100%; /* 전체 화면 가로 크기 */
+      padding-left: 10px; /* 로고와 화면 왼쪽 여백 */
+      margin-top: 20px; /* 로고와 텍스트 사이 간격 */
+    }
+
+    .box{
+          background-color:white;
+          border: 1px solid #E2E2E2;
+          font-size: 15px;
+          margin: 20px 0px -20px 0px;
+          padding: 10px;
+          width: calc(100% - 1190px);
+          height: 60px;
+          color: black;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          margin-right: 75%;
+    }
+
+    .boxx{
+          background-color:#f5f7fa;
+          border: 1px solid #E2E2E2;
+          font-size: 15px;
+          margin: 20px 0px -20px 0px;
+          padding: 10px;
+          width: calc(100% - 1190px);
+          height: 60px;
+          color: green;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          margin-right: 75%;
+    }
+
+    .boxxx{
+          background-color:white;
+          border: 1px solid #E2E2E2;
+          font-size: 15px;
+          margin: 20px 0px -20px 0px;
+          padding: 5px;
+          width: calc(100% - 1190px);
+          height: 60px;
+          color: black;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          margin-right: 75%;
+          font-weight:bold;
+    }
+
+    .boxes{
+          background-color:white;
+          border: 1px solid #E2E2E2;
+          font-size: 15px;
+          margin: 40px 0px 20px 0px;
+          padding: 10px;
+          width: calc(100% - 1190px);
+          height: 60px;
+          color: black;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          margin-right: 75%;
+    }
+    
+    .card-info{
+      font-size:10px;
+      margin-top:-30px;
+    }
+
+    .last-info{
+      margin-right:0px;
+    }
+
+    .lasted-info{
+      margin-top:-500px;
+    }
+
+    .blue-button {
+    background-color: blue; 
+    color: white; 
+    padding: 10px 100px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+  }
+
+  .infologo{
+    background-color:white;
+    width: 10px; 
+      height: 10px;
+      border-color:black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100px; 
+      font-family: Arial, sans-serif;
+      font-size: 7px; 
+      color: black;
+      margin-right: 200px; 
+      margin-bottom:-20px;
+  }
+
+  .info{
+    margin-left:-80px;
+    margin-top:10px;
+    font-size:7px;
+  }
+
+  .infoo{
+    font-size:7px;
+  }
+    
+  </style>
+  <script>
+    function validateForm(event) {
+      event.preventDefault(); // 기본 제출 동작 방지
+      
+      // 필수 입력 필드 가져오기
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const zip = document.getElementById('zip').value.trim();
+      const cardNumber = document.getElementById('cardNumber').value.trim();
+      const nameOnCard = document.getElementById('nameonCard').value.trim();
+      const cvv = document.getElementById('cvv').value.trim();
+      const expirationDate = document.getElementById('expirationDate').value.trim();
+      const creditcard=document.getElementById('creditcard').value.trim();
+      const cash=document.getElementById('cash').value.trim();
+      const PayPal=document.getElementById('PayPal').value.trim();
+      
+      // 유효성 검사
+      if (firstName === '' || lastName === '') {
+        alert("First name and Last name are required.");
+        return;
+      }
+      
+      if (username === '') {
+        alert("Username is required.");
+        return;
+      }
+      
+      if (address === '') {
+        alert("Address is required.");
+        return;
+      }
+      
+      if (zip === '' || !/^\d{5}$/.test(zip)) {
+        alert("Please enter a valid 5-digit Zip code.");
+        return;
+      }
+      
+      if (cardNumber === '' || !/^\d{16}$/.test(cardNumber)) {
+        alert("Please enter a valid 16-digit card number.");
+        return;
+      }
+      
+      if (nameOnCard === '') {
+        alert("Name on card is required.");
+        return;
+      }
+      
+      if (cvv === '' || !/^\d{3}$/.test(cvv)) {
+        alert("Please enter a valid 3-digit CVV.");
+        return;
+      }
+      
+      if (expirationDate === '') {
+        alert("Please enter the expiration date.");
+        return;
+      }
+
+      if(creditcard.value==="" || PayPal==="" || cash===""){
+        alert("Select your pay method");
+        return;
+      }
+      
+      // 모든 유효성 검사를 통과한 경우 제출 확인
+      if (confirm("Are you sure you want to submit the form?")) {
+        document.getElementById('checkoutForm').submit();
+      }
+    }
+
+     // onChange 이벤트 처리
+     function handlePromoCodeChange() {
+      alert("Promo code changed!");
+    }
+
+    // onClick 이벤트 처리
+    function handleClick() {
+      alert("Button clicked!");
+    }
+
+    // onMouseOver 이벤트 처리
+    function handleMouseOver() {
+      console.log("Mouse is over the button!");
+    }
+
+    // onMouseOut 이벤트 처리
+    function handleMouseOut() {
+      console.log("Mouse left the button!");
+    }
+
+    // onKeyDown 이벤트 처리
+    function handleKeyDown(event) {
+      if (event.key === 'Enter') {
+        alert("Enter key pressed!");
+      }
+    }
+
+    function handleContinueToPay() {
+  alert("Continue to pay button clicked!");
+  // 추가적인 동작이 필요하면 여기에서 처리
+}
+
+
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo-container">
+      B
+    </div>
+    <h2>
+      Checkout Form
+    </h2>
+    <h1 style="text-align:center">
+        Here is an example of a form created entirely using form controls in Bootstrap. Each required form set has a verification status that can be triggered by trying to submit the form without completing it.
+    </h1>
+
+    <!-- 3과 Shopping Cart Billing address 행 맞추기 -->
+    <div class="row">
+      <div class="smallbox">
+        3
+      </div>
+      <h1>Shopping Cart Billing address</h1>
+    </div>
+
+    <div class="box">
+      <p style="text-align:left;">
+        $12 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Product Name &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Brief description
+      </p>
+    </div>
+    
+
+    <div class="box">
+      <p style="text-align:left;">
+        $8 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Second product &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Brief description
+      </p>
+    </div>
+
+    <div class="box">
+      <p style="text-align:left;">
+        $5 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Third item &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Brief description
+      </p>
+    </div>
+
+    <div class="boxx">
+      <p style="text-align:left;">
+        - $5 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Promo code &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp EXAMPLECODE
+      </p>
+    </div>
+    <div class="boxxx">
+      <p style="text-align:left;">
+        $20 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total(USD)
+      </p>
+    </div>
+    
+    <div class="boxes">
+      <p style="text-align:left;">
+        <form id="checkoutForm" onsubmit="validateForm(event)">
+            <!-- Promo Code Section -->
+            <label for="promoCode"></label>
+             <input type="text" id="promoCode" onchange="handlePromoCodeChange()" onkeydown="handleKeyDown(event)" placeholder="Promo Code">
+             <input type="submit" value="Check"  onclick="handleClick()" onmouseover="handleMouseOver()" onmouseout="handleMouseOut()">
+          </form>
+      </p>
+    </div>
+
+    <div class="lasted-info">
+    <p style="text-align:left;">Last name &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp First name
+        <form action="/action_page.php">
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+            <input type="text" id="firstName" name="firstName" placeholder="First Name"><br><br>
+</form>
+</p>
+<form action="/action_page.php">
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Username<br>
+  <input type="text" id="username" name="username" placeholder="Username" style="width:500px;">
+  
+</form>
+
+<form action="/action_page.php">
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Email (optional)<br>
+  <input type="text" id="email" name="email" required minlength="20" placeholder="you@example.com" style="width:500px;">
+</form>
+
+<form action="/action_page.php">
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Address<br>
+  <input type="text" id="address" name="address" placeholder="1234 First Street" style="width:500px;">
+</form>
+
+<form action="/action_page.php">
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Title 2 (optional)<br>
+  <input type="text" id="title2" name="title2" placeholder="Apartment 24" style="width:500px;">
+</form>
+
+<form action="/action_page.php">
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Zip code &nbsp &nbsp &nbsp &nbsp  Region &nbsp &nbsp Country<br>
+  <input type="text" id="zip" name="zip" placeholder="" style="width:200px;">
+  <td align="center" style="height:30px;"></td>
+<td>
+   <select name="Choose...">
+      <option value="red">Choose...</option>
+      <option value="green">California</option>
+   </select>
+
+  <select name="Choose...">
+      <option value="red">Choose...</option>
+      <option value="green">United States</option>
+   </select>
+  <br><br><br>
+</td>
+
+<form>
+  <label for="vehicle1"> The shipping address is the same as my billing address</label>
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><br>
+  <label for="vehicle2"> Save this information next time</label>
+  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+</form>
+<br><br>
+<span style="margin-left: -10px;">Payment Method</span>
+<form>
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<label for="html">credit card</label>
+  <input type="radio" id="creditcard" name="creditcard" value="credit card"><br>
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<label for="css">cash</label>
+  <input type="radio" id="cash" name="cash" value="cash"><br>
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<label for="javascript">PayPal</label>
+  <input type="radio" id="PayPal" name="PayPal" value="PayPal"> <br><br>
+</form>
+<p style="text-align:left;">Card number &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Name on card<form action="/action_page.php">
+  <input type="text" id="cardNumber" name="cardNumber" value="">
+  <input type="text" id="nameonCard" name="nameonCard" value=""><br><br>
+</form></p>
+<div class="card-info">
+&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Full name as displayed on the card
+</div>
+
+<div class="last-info">
+<p style="text-align:left;">Triple Code (CVV)  &nbsp Expiration date<form action="/action_page.php">
+  <input type="text" id="cvv" name="cvv" value="" style="width:100px">
+  <input type="text" id="expirationDate" name="expirationDate" value="" style="width:100px"><br><br>
+</form></p>
+</form>
+</div>
+
+</div>
+
+<form action="/examples/media/action_target.php" method="get">
+  <textarea name="opinion" cols="30" rows="5" placeholder="Promo code"></textarea><br>
+  <input type="submit">
+</form>
+<form action="/submit" method="post">
+  <label for="birthday">Select your birthday:</label>
+  <input type="date" id="birthday" name="birthday">
+  <input type="submit" value="Submit">
+</form>
+
+<br>
+<br>
+<div class="last-info">
+  <p style="text-align:center;">
+    <form action="/action_page.php">
+        <input type="submit" value="Continue to pay" class="blue-button" onclick="validateForm(event)">
+      </form>      
+    
+  </p>
+</div>
+</form>
+
+<div class="infologo">
+  C
+</div>
+<div class="info">
+2017-2024 Company Name
+</div>
+
+<div class="infoo">
+<a href="https://noname">Technical Support</a>
+<a href="https://noname">Usage Agreement</a>
+<a href="https://noname">privacy policy</a>
+</div>
+  </div>
+
+</body>
+</html>
