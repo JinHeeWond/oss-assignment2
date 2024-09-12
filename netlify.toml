@@ -1,16 +1,7 @@
-[[redirects]]
-  from = "/old-path"
-  to = "/new-path"
-  status = 301
-  force = false
-  query = {path = ":path"}
-  conditions = {Language = ["en"], Country = ["US"], Role = ["admin"]}
+[build]
+  publish = "hw2"  # hw2 폴더 안의 파일을 배포
 
-## This rule redirects to an external API, signing requests with a secret
 [[redirects]]
-  from = "/search"
-  to = "https://api.mysearch.com"
+  from = "/*"
+  to = "/form.htm"  # form.htm을 기본 파일로 설정
   status = 200
-  force = true # COMMENT: ensure that we always redirect
-  headers = {X-From = "Netlify"}
-  signed = "API_SIGNATURE_TOKEN"
