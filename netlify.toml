@@ -3,5 +3,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/form.htm"  # form.htm을 기본 파일로 설정
+  to = "/form_nostyle.htm"  # form.htm을 기본 파일로 설정
   status = 200
