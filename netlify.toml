@@ -1,5 +1,5 @@
 [build]
-  publish="hw2-2"
+  publish="hw4-1"
 
 [[redirects]]
    from="/*"
