@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX CRUD Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #contents { margin-top: 20px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Heewon's AJAX CRUD</h1>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <label for="age">Age:</label>
+        <input type="number" id="age">
+        <label for="city">City:</label>
+        <input type="text" id="city"> 
+        <label for="job">Job:</label>
+        <input type="text" id="job"> 
+        <button id="btnAdd">Add Student</button>
+        <button id="btnStu">Show Students</button>
+    </div>
+    <div id="contents"></div>
+    <script>
+        window.onload = function () {
+            let btnAdd = document.getElementById("btnAdd");
+            let btnStu = document.getElementById("btnStu"); // Show Students 버튼 추가
+            btnAdd.addEventListener("click", postData);
+            btnStu.addEventListener("click", getStudents); // Show Students 버튼 클릭 이벤트 추가
+            getStudents(); // 페이지 로드 시 학생 목록 가져오기
+        }
+
+        function getStudents() {
+            let contents = document.getElementById("contents");
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:3000/data");
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.send();
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const res = JSON.parse(xhr.response);
+                    contents.innerHTML = makeList(res);
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            }
+        }
+
+        function makeList(data) {
+    let str = "<ul>";
+    for (let item of data) {
+        str += `
+            <li>
+                ${item.name} (${item.age}, ${item.city}, ${item.job}) 
+                <button onclick="updateData(${item.id})">수정</button>
+                <button onclick="deleteData(${item.id})">삭제</button>
+            </li>
+        `;
+    }
+    str += "</ul>";
+    return str;
+}
+
+function postData() {
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let city = document.getElementById("city").value;
+    let job = document.getElementById("job").value;
+
+    // 학생 정보를 모두 입력했는지 확인
+    if (!name || !age || !city || !job) {
+        alert("모든 필드를 채워야 합니다.");
+        return; 
+    }
+
+    const xhrGet = new XMLHttpRequest();
+    xhrGet.open("GET", "http://localhost:3000/data");
+    xhrGet.setRequestHeader("content-type", "application/json");
+    xhrGet.send();
+    
+    xhrGet.onload = () => {
+        if (xhrGet.status === 200) {
+            const response = JSON.parse(xhrGet.response);
+            const existingData = response.data || []; 
+            const lastId = existingData.length > 0 ? Math.max(...existingData.map(item => parseInt(item.id))) : 0;
+            const newId = (lastId + 1).toString(); 
+
+            const xhrPost = new XMLHttpRequest();
+            xhrPost.open("POST", "http://localhost:3000/data");
+            xhrPost.setRequestHeader("content-type", "application/json;charset=UTF-8");
+            const data = { id: newId, name: name, age: age, city: city, job: job }; 
+            xhrPost.send(JSON.stringify(data));
+            xhrPost.onload = () => {
+                if (xhrPost.status === 201) {
+                    getStudents(); 
+                    clearInputs(); 
+                } else {
+                    console.log(xhrPost.status, xhrPost.statusText);
+                }
+            };
+        } else {
+            console.log(xhrGet.status, xhrGet.statusText);
+        }
+    };
+}
+
+
+function clearInputs() {
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("city").value = "";
+    document.getElementById("job").value = "";
+}
+
+
+        function updateData(id) {
+            const xhr = new XMLHttpRequest();
+            const name = prompt("수정할 이름을 입력하세요:");
+            const age = prompt("수정할 나이를 입력하세요:");
+            const city = prompt("수정할 도시를 입력하세요:");
+            const job = prompt("수정할 직업을 입력하세요:"); 
+            xhr.open("PUT", "http://localhost:3000/data/" + id);
+            xhr.setRequestHeader("content-type", "application/json;charset=UTF-8");
+            const data = { name: name, age: age, city: city, job: job }; 
+            xhr.send(JSON.stringify(data));
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    getStudents();
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            }
+        }
+
+        function deleteData(id) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("DELETE", "http://localhost:3000/data/" + id);
+            xhr.send();
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    getStudents();
+                } else {
+                    console.log(xhr.status, xhr.statusText);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
