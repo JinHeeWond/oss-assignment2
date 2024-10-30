@@ -3,5 +3,5 @@
 
 [[redirects]]
    from="/*"
-   to="/index.html"
+   to="/my_ajax.html"
    status=200
