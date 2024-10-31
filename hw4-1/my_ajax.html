@@ -52,43 +52,40 @@
         }
 
         function makeList(data) {
-    let str = "<ul>";
-    for (let item of data) {
-        str += `
-            <li>
-                ${item.name} (${item.age}, ${item.city}, ${item.job}) 
-                <button onclick="updateData(${item.id})">수정</button>
-                <button onclick="deleteData(${item.id})">삭제</button>
-            </li>
-        `;
-    }
-    str += "</ul>";
-    return str;
-}
+            let str = "<ul>";
+            for (let item of data) {
+                str += `
+                    <li>
+                        ${item.name} (${item.age}, ${item.city}, ${item.job}) 
+                        <button onclick="updateData('${item.id}')">수정</button>
+                        <button onclick="deleteData('${item.id}')">삭제</button>
+                    </li>
+                `;
+            }
+            str += "</ul>";
+            return str;
+        }
 
-function postData() {
-    let name = document.getElementById("name").value;
-    let age = document.getElementById("age").value;
-    let city = document.getElementById("city").value;
-    let job = document.getElementById("job").value;
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
 
-    // 학생 정보를 모두 입력했는지 확인
-    if (!name || !age || !city || !job) {
-        alert("모든 필드를 채워야 합니다.");
-        return; 
-    }
+        function postData() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let city = document.getElementById("city").value;
+            let job = document.getElementById("job").value;
 
-    const xhrGet = new XMLHttpRequest();
-    xhrGet.open("GET", "http://localhost:3000/data");
-    xhrGet.setRequestHeader("content-type", "application/json");
-    xhrGet.send();
-    
-    xhrGet.onload = () => {
-        if (xhrGet.status === 200) {
-            const response = JSON.parse(xhrGet.response);
-            const existingData = response.data || []; 
-            const lastId = existingData.length > 0 ? Math.max(...existingData.map(item => parseInt(item.id))) : 0;
-            const newId = (lastId + 1).toString(); 
+            // 학생 정보를 모두 입력했는지 확인
+            if (!name || !age || !city || !job) {
+                alert("모든 필드를 채워야 합니다.");
+                return; 
+            }
+
+            const newId = generateUUID(); // UUID 생성
 
             const xhrPost = new XMLHttpRequest();
             xhrPost.open("POST", "http://localhost:3000/data");
@@ -103,20 +100,14 @@ function postData() {
                     console.log(xhrPost.status, xhrPost.statusText);
                 }
             };
-        } else {
-            console.log(xhrGet.status, xhrGet.statusText);
         }
-    };
-}
 
-
-function clearInputs() {
-    document.getElementById("name").value = "";
-    document.getElementById("age").value = "";
-    document.getElementById("city").value = "";
-    document.getElementById("job").value = "";
-}
-
+        function clearInputs() {
+            document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("city").value = "";
+            document.getElementById("job").value = "";
+        }
 
         function updateData(id) {
             const xhr = new XMLHttpRequest();
@@ -126,7 +117,7 @@ function clearInputs() {
             const job = prompt("수정할 직업을 입력하세요:"); 
             xhr.open("PUT", "http://localhost:3000/data/" + id);
             xhr.setRequestHeader("content-type", "application/json;charset=UTF-8");
-            const data = { name: name, age: age, city: city, job: job }; 
+            const data = { id: id, name: name, age: age, city: city, job: job }; 
             xhr.send(JSON.stringify(data));
             xhr.onload = () => {
                 if (xhr.status === 200) {
